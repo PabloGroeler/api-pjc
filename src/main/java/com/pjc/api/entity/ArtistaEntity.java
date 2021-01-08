@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "Artistas")
-public class ArtistaEntity extends BaseModel {
+public class ArtistaEntity extends BaseEntity {
 
     private String nome;
 

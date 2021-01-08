@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @MappedSuperclass
-public class BaseModel {
+public class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
