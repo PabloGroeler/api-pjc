@@ -13,20 +13,21 @@ public class AlbumController {
     @Autowired
     AlbumService service;
 
-    @GetMapping
+    @GetMapping("/{page}")
     public ResponseEntity get(@PathVariable("page") Integer page,
-                              @RequestParam(name = "ordem", required = true, defaultValue = "") Integer ordem,
+                              @RequestParam(name = "ordem", required = false, defaultValue = "") Integer ordem,
                               @RequestParam(name = "filtro", required = false, defaultValue = "") String filtro) {
-        return service.albuns(page, ordem, filtro); /// FIX Page
+        return service.albuns(page, ordem, filtro);
     }
 
     @PostMapping
     public ResponseEntity post(@RequestBody AlbumEntity album) {
-        return ResponseEntity.ok("Posting");
+        return service.post(album);
     }
 
     @PutMapping
-    public ResponseEntity put(@RequestBody AlbumEntity album) {
-        return ResponseEntity.ok("Putting");
+    public ResponseEntity put(@PathVariable("id") Long id,
+                              @RequestBody AlbumEntity album) {
+        return service.put(id, album);
     }
 }

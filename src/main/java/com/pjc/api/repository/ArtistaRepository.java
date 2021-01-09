@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ArtistaRepository extends JpaRepository<ArtistaEntity, Long>, JpaSpecificationExecutor<ArtistaEntity> {
 
-    List<AlbumEntity> FindAlbunsByNome(String nome);
+//    List<AlbumEntity> FindAlbunsByNome(String nome); /// FIX
 
     class Specifications {
         public static Specification<ArtistaEntity> nomeQueContem(String nome) {

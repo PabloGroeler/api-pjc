@@ -13,20 +13,20 @@ public class ArtistaController {
     @Autowired
     ArtistaService service;
 
-    @GetMapping
-    public ResponseEntity get(@PathVariable("page") Integer page,
-                              @RequestParam(name = "ordem", required = true, defaultValue = "") Integer ordem,
+    @GetMapping()
+    public ResponseEntity get(@RequestParam(name = "ordem", required = false, defaultValue = "") Integer ordem,
                               @RequestParam(name = "filtro", required = false, defaultValue = "") String filtro) {
-        return service.artistas(page, ordem, filtro);
+        return service.artistas(ordem, filtro);
     }
 
     @PostMapping
     public ResponseEntity post(@RequestBody ArtistaEntity artista) {
-        return ResponseEntity.ok("Posting");
+        return service.post(artista);
     }
 
-    @PutMapping
-    public ResponseEntity put(@RequestBody ArtistaEntity artista) {
-        return ResponseEntity.ok("Putting");
+    @PutMapping("/{id}")
+    public ResponseEntity put(@PathVariable("id") Long id,
+                              @RequestBody ArtistaEntity artista) {
+        return service.put(id, artista);
     }
 }
