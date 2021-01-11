@@ -1,10 +1,13 @@
 package com.pjc.api.controller;
 
-import com.pjc.api.entity.AlbumEntity;
+import com.pjc.api.dto.ImagemDto;
+import com.pjc.api.entity.Album;
 import com.pjc.api.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("albuns")
@@ -21,13 +24,19 @@ public class AlbumController {
     }
 
     @PostMapping
-    public ResponseEntity post(@RequestBody AlbumEntity album) {
+    public ResponseEntity post(@RequestBody Album album) {
         return service.post(album);
     }
 
     @PutMapping
     public ResponseEntity put(@PathVariable("id") Long id,
-                              @RequestBody AlbumEntity album) {
+                              @RequestBody Album album) {
         return service.put(id, album);
+    }
+
+    @PostMapping("/imagem")
+    public ResponseEntity uploadImagem(@RequestParam MultipartFile files) {
+
+        return ResponseEntity.ok("teste");
     }
 }

@@ -1,6 +1,6 @@
 package com.pjc.api.controller;
 
-import com.pjc.api.entity.ArtistaEntity;
+import com.pjc.api.entity.Artista;
 import com.pjc.api.service.ArtistaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +20,13 @@ public class ArtistaController {
     }
 
     @PostMapping
-    public ResponseEntity post(@RequestBody ArtistaEntity artista) {
+    public ResponseEntity post(@RequestBody Artista artista) {
         return service.post(artista);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity put(@PathVariable("id") Long id,
-                              @RequestBody ArtistaEntity artista) {
+                              @RequestBody Artista artista) {
         return service.put(id, artista);
     }
 }

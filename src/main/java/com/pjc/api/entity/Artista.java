@@ -10,10 +10,10 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "Artistas")
-public class ArtistaEntity extends BaseEntity {
+public class Artista extends Base {
 
     private String nome;
 
-    @OneToMany(targetEntity= AlbumEntity.class, mappedBy="artista",cascade= CascadeType.ALL)
-    private List<AlbumEntity> albuns;
+    @OneToMany(targetEntity= Album.class, mappedBy="artista",cascade= CascadeType.ALL)
+    private List<Album> albuns;
 }

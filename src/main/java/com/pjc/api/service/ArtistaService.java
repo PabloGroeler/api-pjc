@@ -1,12 +1,9 @@
 package com.pjc.api.service;
 
-import com.pjc.api.entity.ArtistaEntity;
-import com.pjc.api.repository.AlbumRepository;
+import com.pjc.api.entity.Artista;
 import com.pjc.api.repository.ArtistaRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
@@ -30,7 +27,7 @@ public class ArtistaService extends BaseService {
             specification = getSpecification(specification).and(ArtistaRepository.Specifications.nomeQueContem(nome));
         }
 
-        List<ArtistaEntity> artistas = repository.findAll(specification, Sort.by(GetOrder(ordem), "nome"));
+        List<Artista> artistas = repository.findAll(specification, Sort.by(GetOrder(ordem), "nome"));
         if (artistas.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Artista(s) não encontrado(s).");
         }
@@ -38,13 +35,13 @@ public class ArtistaService extends BaseService {
         return ResponseEntity.ok(artistas);
     }
 
-    public ResponseEntity post(ArtistaEntity artista) {
+    public ResponseEntity post(Artista artista) {
         repository.save(artista);
         return ResponseEntity.ok("Artista salvo com sucesso");
     }
 
-    public ResponseEntity put(Long id, ArtistaEntity artista) {
-        Optional<ArtistaEntity> findArtista = repository.findById(id);
+    public ResponseEntity put(Long id, Artista artista) {
+        Optional<Artista> findArtista = repository.findById(id);
         if (!findArtista.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Artista não encontrado.");
         }

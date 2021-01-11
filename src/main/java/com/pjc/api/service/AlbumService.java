@@ -1,9 +1,8 @@
 package com.pjc.api.service;
 
-import com.pjc.api.entity.AlbumEntity;
-import com.pjc.api.entity.ArtistaEntity;
+import com.pjc.api.entity.Album;
 import com.pjc.api.repository.AlbumRepository;
-import com.pjc.api.repository.ArtistaRepository;
+import io.minio.errors.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +14,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 @Service
@@ -23,6 +25,9 @@ public class AlbumService extends BaseService {
 
     @Autowired
     AlbumRepository repository;
+
+    @Autowired
+    FileUploader uploader;
 
    public ResponseEntity albuns(Integer page, Integer ordem, String nome) {
         Specification specification = null;
@@ -40,13 +45,13 @@ public class AlbumService extends BaseService {
 
     }
 
-    public ResponseEntity post(AlbumEntity album) {
+    public ResponseEntity post(Album album) {
         repository.save(album);
         return ResponseEntity.ok("Album salvo com sucesso");
     }
 
-    public ResponseEntity put(Long id, AlbumEntity album) {
-        Optional<AlbumEntity> findAlbum = repository.findById(id);
+    public ResponseEntity put(Long id, Album album) {
+        Optional<Album> findAlbum = repository.findById(id);
         if (!findAlbum.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Album não encontrado.");
         }
@@ -54,5 +59,15 @@ public class AlbumService extends BaseService {
         album.setId(findAlbum.get().getId());
         repository.save(album);
         return ResponseEntity.ok("Album atualizado com sucesso.");
+    }
+
+    public ResponseEntity AddImagem() {
+        try {
+            uploader.upload();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ResponseEntity.ok("Imagens adicionadas com sucesso.");
     }
 }

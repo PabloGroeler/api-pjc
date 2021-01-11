@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "Albuns")
-public class AlbumEntity extends BaseEntity {
+public class Album extends Base {
 
     private String nome;
 
@@ -21,5 +21,5 @@ public class AlbumEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name="artista", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnoreProperties("albuns")
-    private ArtistaEntity artista;
+    private Artista artista;
 }
