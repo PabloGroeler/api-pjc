@@ -6,15 +6,17 @@ import io.minio.MinioClient;
 import io.minio.UploadObjectArgs;
 import io.minio.errors.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 @Service
 public class FileUploader {
 
-    public void upload() throws IOException, InvalidKeyException, InvalidResponseException, InsufficientDataException, NoSuchAlgorithmException, ServerException, InternalException, XmlParserException, ErrorResponseException {
+    public void upload(List<MultipartFile> files) throws IOException, InvalidKeyException, InvalidResponseException, InsufficientDataException, NoSuchAlgorithmException, ServerException, InternalException, XmlParserException, ErrorResponseException {
 
         try {
             MinioClient minioClient =
@@ -32,11 +34,12 @@ public class FileUploader {
             }
 
             // Upload '/home/user/Photos/asiaphotos.zip' as object name 'asiaphotos-2015.zip' to bucket
+            MultipartFile multipartFile = files.get(0);
             minioClient.uploadObject(
                     UploadObjectArgs.builder()
                             .bucket("teste-pjc")
-                            .object("teste-pjc-2021.zip")
-                            .filename("/home/user/Photos/asiaphotos.zip")
+                            .object(multipartFile.getName()) /// FIX
+//                            .filename("/home/user/Photos/asiaphotos.zip")
                             .build());
             System.out.println(
                     "'/home/user/Photos/asiaphotos.zip' is successfully uploaded as "

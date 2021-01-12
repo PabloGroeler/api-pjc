@@ -2,7 +2,6 @@ package com.pjc.api.service;
 
 import com.pjc.api.entity.Album;
 import com.pjc.api.repository.AlbumRepository;
-import io.minio.errors.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,10 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.io.File;
-import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 @Service
@@ -63,7 +58,7 @@ public class AlbumService extends BaseService {
 
     public ResponseEntity AddImagem() {
         try {
-            uploader.upload();
+//            uploader.upload(files);
         } catch (Exception e) {
             e.printStackTrace();
         }
