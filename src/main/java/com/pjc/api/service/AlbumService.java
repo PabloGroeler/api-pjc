@@ -22,7 +22,7 @@ public class AlbumService extends BaseService {
     AlbumRepository repository;
 
     @Autowired
-    FileUploader uploader;
+    FileManager uploader;
 
    public ResponseEntity albuns(Integer page, Integer ordem, String nome) {
         Specification specification = null;

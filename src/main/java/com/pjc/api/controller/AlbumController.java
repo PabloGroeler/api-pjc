@@ -1,12 +1,10 @@
 package com.pjc.api.controller;
 
-import com.pjc.api.dto.ImagemDto;
 import com.pjc.api.entity.Album;
 import com.pjc.api.service.AlbumService;
-import com.pjc.api.service.FileUploader;
+import com.pjc.api.service.FileManager;
 import io.minio.errors.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,7 +22,7 @@ public class AlbumController {
     AlbumService service;
 
     @Autowired
-    FileUploader uploader;
+    FileManager uploader;
 
     @GetMapping("/{page}")
     public ResponseEntity get(@PathVariable("page") Integer page,
@@ -48,6 +46,11 @@ public class AlbumController {
     public ResponseEntity uploadImagem(@RequestParam("imagem") List<MultipartFile> files) throws IOException, InvalidResponseException, InvalidKeyException, NoSuchAlgorithmException, ServerException, ErrorResponseException, XmlParserException, InsufficientDataException, InternalException {
         uploader.upload(files);
 
-        return ResponseEntity.ok("teste");
+        return ResponseEntity.ok("Upload de arquivos com sucesso.");
+    }
+
+    @GetMapping("getImagens")
+    public ResponseEntity getImagens() throws IOException, InvalidResponseException, InvalidKeyException, NoSuchAlgorithmException, ServerException, InternalException, XmlParserException, InsufficientDataException, ErrorResponseException {
+        return uploader.getImage();
     }
 }
