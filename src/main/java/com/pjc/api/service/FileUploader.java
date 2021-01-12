@@ -33,17 +33,16 @@ public class FileUploader {
                 System.out.println("Bucket 'teste-pjc' já existe.");
             }
 
-            // Upload '/home/user/Photos/asiaphotos.zip' as object name 'asiaphotos-2015.zip' to bucket
-            MultipartFile multipartFile = files.get(0);
-            minioClient.uploadObject(
-                    UploadObjectArgs.builder()
-                            .bucket("teste-pjc")
-                            .object(multipartFile.getName()) /// FIX
-//                            .filename("/home/user/Photos/asiaphotos.zip")
-                            .build());
-            System.out.println(
-                    "'/home/user/Photos/asiaphotos.zip' is successfully uploaded as "
-                            + "object 'asiaphotos-2015.zip' to bucket 'asiatrip'.");
+            MultipartFile multipartFile = files.get(1);
+            String nome = multipartFile.getOriginalFilename();
+            for (MultipartFile file : files) {
+                minioClient.uploadObject(
+                        UploadObjectArgs.builder()
+                                .bucket("teste-pjc")
+                                .object(file.getOriginalFilename()) /// FIX
+                                .filename("C:\\images\\" + file.getOriginalFilename())
+                                .build());
+            }
         } catch (MinioException e) {
             System.out.println("Error occurred: " + e);
         }
