@@ -15,7 +15,7 @@ public class Album extends Base {
 
     private String nome;
 
-    @Transient /// FIX
+    @Transient
     private List<byte[]> capa;
 
     @ManyToOne
