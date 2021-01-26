@@ -61,11 +61,7 @@ public class FileManager {
                 GetPresignedObjectUrlArgs.builder()
                         .method(Method.GET)
                         .bucket(BUCKET_NAME)
-<<<<<<< HEAD
                         .object("beatles-help-uk-cover-art.jpg")
-=======
-                        .object("baixados.jpg")
->>>>>>> parent of d6a6793... Docker e ajustes
                         .expiry(1, TimeUnit.DAYS)
                         .build()));
     }

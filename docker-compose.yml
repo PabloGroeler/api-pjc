@@ -1,0 +1,47 @@
+version: '3'
+services:
+  nginx:
+   container_name: nginx
+   image: nginx:1.13
+   restart: always
+   ports:
+   - 80:80
+   - 443:443
+   volumes:
+   - ./nginx/conf.d:/etc/nginx/conf.d
+   depends_on:
+   - springbootapp
+# POSTGRES *********************************
+  postgres:
+    image: postgres:latest
+    network_mode: bridge
+    container_name: postgres-pjc
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    expose:
+    - 5432
+    ports:
+      - 5432:5432
+    environment:
+         - POSTGRES_PASSWORD=postgres
+         - POSTGRES_USER=postgres
+         - POSTGRES_DB=pjc-bd
+    restart: unless-stopped
+# APP*****************************************
+  springbootapp:
+    image: springbootapp:latest
+    network_mode: bridge
+    container_name: springbootapp
+    expose:
+      - 8091
+    ports:
+      - 8091:8091
+    restart: unless-stopped
+    environment:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-pjc:5432/pjc-bd?createDatabaseIfNotExist=true
+    depends_on:
+      - postgres
+    links:
+      - postgres
+volumes:
+  postgres-data:
