@@ -5,10 +5,7 @@ import com.pjc.api.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController()
 @RequestMapping("/usuarios")
@@ -24,5 +21,10 @@ public class UsuarioController {
     public ResponseEntity login(@RequestBody Usuario usuario) {
         usuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
         return service.salvar(usuario);
+    }
+
+    @GetMapping("")
+    public ResponseEntity isLive() {
+        return ResponseEntity.ok("Bem vindo! PJC-API Works!!");
     }
 }

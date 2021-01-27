@@ -5,6 +5,9 @@ Nesse diretório possui os arquivos Dockerfile e docker-compose.yml
 
 Executar no Docker:
 docker build ./ -t springbootapp
+Executar: docker create -v /var/lib/postgresql/data --name PostgresData alpine
+docker run -p 5432:5432 --name postgres -e POSTGRES_PASSWORD=postgres -d --volumes-from PostgresData postgres
+ocker run -it --rm -d -p 8080:80 --name web nginx
 docker-compose up
 
 Salvando docker:

@@ -2,6 +2,7 @@ version: '3'
 services:
   nginx:
    container_name: nginx
+   network_mode: bridge
    image: nginx:1.13
    restart: always
    ports:
@@ -9,7 +10,11 @@ services:
    - 443:443
    volumes:
    - ./nginx/conf.d:/etc/nginx/conf.d
+   links:
+   - springbootapp
    depends_on:
+   - springbootapp
+   volumes_from:
    - springbootapp
 # POSTGRES *********************************
   postgres:
@@ -32,6 +37,11 @@ services:
     image: springbootapp:latest
     network_mode: bridge
     container_name: springbootapp
+    build: ./
+    working_dir: /springbootapp
+    tty: true
+    volumes:
+      - ./springbootapp:/springbootapp
     expose:
       - 8091
     ports:
@@ -43,5 +53,6 @@ services:
       - postgres
     links:
       - postgres
+    command: mvn clean spring-boot:run
 volumes:
   postgres-data:
