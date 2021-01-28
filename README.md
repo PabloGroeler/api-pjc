@@ -1,81 +1,80 @@
-Orientação para executar o projeto:
+# Orientação para executar o projeto
 
-Entrar na pasta raiz do projeto pela linha de comando;
-Nesse diretório possui os arquivos Dockerfile e docker-compose.yml
+ - Entrar na pasta raiz do projeto
+ - Fazer deploy da aplicação java
+ 
+# Docker
+  - docker build ./ -t springbootapp
 
-Executar no Docker:
-docker build ./ -t springbootapp
-Executar: docker create -v /var/lib/postgresql/data --name PostgresData alpine
-docker run -p 5432:5432 --name postgres -e POSTGRES_PASSWORD=postgres -d --volumes-from PostgresData postgres
-ocker run -it --rm -d -p 8080:80 --name web nginx
-docker-compose up
+	Executar: docker create -v /var/lib/postgresql/data --name PostgresData alpine
 
-Salvando docker:
-docker save -o ./springbootapp.tar springbootapp
-docker save -o ./postgres.tar postgres
+  -	docker-compose up
 
-Carregar Docker:
-docker load -i ./springbootapp.tar
-docker load -i ./postgres.tar
+  - URL aplicação java: http://localhost:8091/api
 
-caminho da aplicação java: http://localhost:8091/api
-------------------------------------------------------------------
+# NGINX
+	- Foi feito a configuração do Proxy reverso
+    - URL para teste: http://localhost/
+  
+# Cadastrar usuário
 
-Método Post para cadastrar usuario:
-http://localhost:8091/api/usuarios
+  - http://localhost:8091api/usuarios
 
-corpo do método:
-{
-    "usuario": "nome",
-    "senha": 123
-}
-------------------------------------------------------------------
-Login:
-http://localhost:8091/api/login
+	corpo do método:
+	{
+		"usuario": "nome",
+		"senha": 123
+	}
 
-corpo: 
+#Login
+    http://localhost:8091/api/login
+	corpo: 
+	{
+		"usuario": "nome",
+		"senha": 123
+	} 
 
-{
-    "usuario": "nome",
-    "senha": 123
-} 
+	O endpoint retornará o Token de autorização do usuário válido por 5 minutos. Usar para testar as demais funcionalidades.
 
-Utilizando o PostMan, o esse endpoint retornará o Token de autorização do usuário válido por 5 minutos. Usar para testar as demais funcionalidades.
-------------------------------------------------------------------
+#Get Artistas + Ordem + Filtro por nome que contém
+	http://localhost:8091/api/artistas?ordem=1&filtro=Serj
 
-Get Artistas com de ordem e filtro por nome que contém:
-http://localhost:8091/api/artistas?ordem=1&filtro=Serj
-
-Post Artistas:
-http://localhost:8091/api/artistas
-Corpo: 
-	{ "nome": "artista" }
+#Post Artistas
+	http://localhost:8091/api/artistas
+	Corpo: 
+		{ "nome": "artista" }
 	
-Put Artistas:
+#Put Artistas
 http://localhost:8091/api/artistas/{codArtista}
 
-Corpo: 
-	{ "nome": "artista alterado" }
-------------------------------------------------------------------
-Get Album com paramêtro de pagina, ordem e filtro por nome que contém: 
-Ordem : 0 - crescente, 1 - Descrescente
-http://localhost:8091/api/albuns/1?ordem=1&filtro=Mic
+	Corpo: 
+		{ "nome": "artista alterado" }
 
-Post album:
-http://localhost:8091/api/albuns
+#Get Album + Paginação + Ordem + Filtro por nome que contém
+	Ordem : 0 - crescente, 1 - Descrescente
+	http://localhost:8091/api/albuns/1?ordem=1&filtro=Mic
 
-Corpo: {
-	"nome": "nome",
-	"artista": {"id": 1001 } /// id_de_artista
-  }
+#Post Album
+	http://localhost:8091/api/albuns
+
+	Corpo: {
+		"nome": "nome",
+		"artista": {"id": 1001 } /// id_de_artista
+	  }
   
-put album:
-http://localhost:8091/api/albuns/{id} - id do album
-Corpo: {
-	"nome": "nome alterado",
-	"artista": {"id": 1001 } /// id_de_artista
-  }
+#Put Album
+	http://localhost:8091/api/albuns/{id} - id do album
+	Corpo: {
+		"nome": "nome alterado",
+		"artista": {"id": 1001 } /// id_de_artista
+	}
 
+#Imagens
 
-http://localhost:8091/api/albuns/upload
-através do postman, é possível fazer upload de multiplas imagens pelo form-data
+#Post
+	http://localhost:8091/api/albuns/upload
+	No Postman, fazer upload de multiplas imagens pelo form-data
+	
+#Get	
+	http://localhost:8091/api/albuns/getImagens
+	

@@ -18,7 +18,7 @@ public class UsuarioController {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostMapping("")
-    public ResponseEntity login(@RequestBody Usuario usuario) {
+    public ResponseEntity cadastrar(@RequestBody Usuario usuario) {
         usuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
         return service.salvar(usuario);
     }
