@@ -22,9 +22,4 @@ public class UsuarioController {
         usuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
         return service.salvar(usuario);
     }
-
-    @GetMapping("")
-    public ResponseEntity isLive() {
-        return ResponseEntity.ok("Bem vindo! PJC-API Works!!");
-    }
 }
