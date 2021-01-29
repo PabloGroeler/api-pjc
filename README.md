@@ -1,9 +1,9 @@
-# Orientação para executar o projeto
+# ORIENTAÇÕES
 
  - Entrar na pasta raiz do projeto
  - Fazer deploy da aplicação java
  
-# Docker
+# DOCKER
   - docker build ./ -t springbootapp
 
 	Executar: docker create -v /var/lib/postgresql/data --name PostgresData alpine
@@ -15,8 +15,10 @@
 # NGINX
 	- Foi feito a configuração do Proxy reverso
     - URL para teste: http://localhost/
-  
-# Cadastrar usuário
+
+# USUÁRIOS 
+ 
+# Cadastrar
 
   - http://localhost:8091api/usuarios
 
@@ -26,7 +28,7 @@
 		"senha": 123
 	}
 
-#Login
+# Login
     http://localhost:8091/api/login
 	corpo: 
 	{
@@ -36,25 +38,29 @@
 
 	O endpoint retornará o Token de autorização do usuário válido por 5 minutos. Usar para testar as demais funcionalidades.
 
-#Get Artistas + Ordem + Filtro por nome que contém
+# ARTISTAS
+
+# Get + Ordem + Filtro por nome que contém
 	http://localhost:8091/api/artistas?ordem=1&filtro=Serj
 
-#Post Artistas
+# Post
 	http://localhost:8091/api/artistas
 	Corpo: 
 		{ "nome": "artista" }
 	
-#Put Artistas
+# Put
 http://localhost:8091/api/artistas/{codArtista}
 
 	Corpo: 
 		{ "nome": "artista alterado" }
 
-#Get Album + Paginação + Ordem + Filtro por nome que contém
+# ALBUM
+
+# Get + Paginação + Ordem + Filtro por nome que contém
 	Ordem : 0 - crescente, 1 - Descrescente
 	http://localhost:8091/api/albuns/1?ordem=1&filtro=Mic
 
-#Post Album
+# Post
 	http://localhost:8091/api/albuns
 
 	Corpo: {
@@ -62,19 +68,19 @@ http://localhost:8091/api/artistas/{codArtista}
 		"artista": {"id": 1001 } /// id_de_artista
 	  }
   
-#Put Album
+# Put
 	http://localhost:8091/api/albuns/{id} - id do album
 	Corpo: {
 		"nome": "nome alterado",
 		"artista": {"id": 1001 } /// id_de_artista
 	}
 
-#Imagens
+# IMAGENS
 
-#Post
+# Post
 	http://localhost:8091/api/albuns/upload
 	No Postman, fazer upload de multiplas imagens pelo form-data
 	
-#Get	
+# Get	
 	http://localhost:8091/api/albuns/getImagens
 	
