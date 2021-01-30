@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class FileManager {
 
-    private static final String BUCKET_NAME = "teste-pjc";
+    private static final String BUCKET_NAME = "testepjc";
     private static final String CAMINHO = "C:\\images\\";
 
     public MinioClient createMinioClient() throws IOException, InvalidKeyException, InvalidResponseException, InsufficientDataException, NoSuchAlgorithmException, ServerException, InternalException, XmlParserException, ErrorResponseException {
@@ -28,9 +28,9 @@ public class FileManager {
         boolean found =
                 minioClient.bucketExists(BucketExistsArgs.builder().bucket(BUCKET_NAME).build());
         if (!found) {
-            minioClient.makeBucket(MakeBucketArgs.builder().bucket(" // Montar 'teste-pjc' bucket se não existir.\n").build());
+            minioClient.makeBucket(MakeBucketArgs.builder().bucket(" // Montar 'testepjc' bucket se não existir.\n").build());
         } else {
-            System.out.println("Bucket 'teste-pjc' já existe.");
+            System.out.println("Bucket 'testepjc' já existe.");
         }
 
         return minioClient;

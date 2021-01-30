@@ -1,16 +1,21 @@
+# DADOS
+	Candidato: Pablo Henrique Groeler
+	E-mail: pablo_groeler@hotmail.com
+	Vaga: Analista Desenvolvedor
+
 # ORIENTAÇÕES
 
- - Entrar na pasta raiz do projeto
- - Fazer deploy da aplicação java
+	- Entrar na pasta raiz do projeto
+	- Fazer deploy da aplicação java
  
 # DOCKER
-  - docker build ./ -t springbootapp
+	- docker build ./ -t springbootapp
 
 	Executar: docker create -v /var/lib/postgresql/data --name PostgresData alpine
 
-  -	docker-compose up
+	-	docker-compose up
 
-  - URL aplicação java: http://localhost:8091/api
+	- URL aplicação java: http://localhost:8091/api
 
 # NGINX
 	- Foi feito a configuração do Proxy reverso
@@ -20,7 +25,7 @@
  
 # Cadastrar
 
-  - http://localhost:8091api/usuarios
+	- http://localhost:8091api/usuarios
 
 	corpo do método:
 	{
@@ -29,6 +34,7 @@
 	}
 
 # Login
+
     http://localhost:8091/api/login
 	corpo: 
 	{
@@ -49,7 +55,7 @@
 		{ "nome": "artista" }
 	
 # Put
-http://localhost:8091/api/artistas/{codArtista}
+	http://localhost:8091/api/artistas/{codArtista}
 
 	Corpo: 
 		{ "nome": "artista alterado" }
@@ -80,6 +86,7 @@ http://localhost:8091/api/artistas/{codArtista}
 # Post
 	http://localhost:8091/api/albuns/upload
 	No Postman, fazer upload de multiplas imagens pelo form-data
+	definir o parametro da chave como 'file' e o nome 'imagem'
 	
 # Get	
 	http://localhost:8091/api/albuns/getImagens
