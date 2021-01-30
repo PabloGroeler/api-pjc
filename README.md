@@ -7,19 +7,17 @@
 
 	- Entrar na pasta raiz do projeto
 	- Fazer deploy da aplicação java
- 
-# DOCKER
-	- docker build ./ -t springbootapp
-
-	Executar: docker create -v /var/lib/postgresql/data --name PostgresData alpine
-
+    
+# DOCKER	
+    - docker build ./ -t springbootapp	
+	
 	- docker-compose up
 
 	- URL aplicação java: http://localhost:8091/api
-
+	
 # NGINX
 	- Foi feito a configuração do Proxy reverso
-    - URL para teste: http://localhost/
+    - URL alternativa para testar o proxy reverso: http://localhost/
 
 # USUÁRIOS 
  
