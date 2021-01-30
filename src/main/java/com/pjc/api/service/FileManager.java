@@ -16,8 +16,8 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class FileManager {
 
-    private static final String BUCKET_NAME = "testepjc";
-    private static final String CAMINHO = "C:\\images\\";
+    private static final String BUCKET_NAME = "teste-pjc";
+    private static final String BASE_IMAGES = System.getProperty("user.dir") + "\\imagem\\";
 
     public MinioClient createMinioClient() throws IOException, InvalidKeyException, InvalidResponseException, InsufficientDataException, NoSuchAlgorithmException, ServerException, InternalException, XmlParserException, ErrorResponseException {
         MinioClient minioClient = MinioClient.builder()
@@ -28,7 +28,7 @@ public class FileManager {
         boolean found =
                 minioClient.bucketExists(BucketExistsArgs.builder().bucket(BUCKET_NAME).build());
         if (!found) {
-            minioClient.makeBucket(MakeBucketArgs.builder().bucket(" // Montar 'testepjc' bucket se não existir.\n").build());
+            minioClient.makeBucket(MakeBucketArgs.builder().bucket(BUCKET_NAME).build());
         } else {
             System.out.println("Bucket 'testepjc' já existe.");
         }
@@ -46,7 +46,7 @@ public class FileManager {
                         UploadObjectArgs.builder()
                                 .bucket(BUCKET_NAME)
                                 .object(file.getOriginalFilename())
-                                .filename(CAMINHO + file.getOriginalFilename())
+                                .filename(BASE_IMAGES + file.getOriginalFilename())
                                 .build());
             }
         } catch (MinioException e) {
@@ -61,7 +61,7 @@ public class FileManager {
                 GetPresignedObjectUrlArgs.builder()
                         .method(Method.GET)
                         .bucket(BUCKET_NAME)
-                        .object("beatles-help-uk-cover-art.jpg")
+                        .object("album-1.jpg")
                         .expiry(1, TimeUnit.DAYS)
                         .build()));
     }

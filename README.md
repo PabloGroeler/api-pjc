@@ -13,7 +13,7 @@
 
 	Executar: docker create -v /var/lib/postgresql/data --name PostgresData alpine
 
-	-	docker-compose up
+	- docker-compose up
 
 	- URL aplicação java: http://localhost:8091/api
 

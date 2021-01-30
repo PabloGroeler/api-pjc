@@ -49,7 +49,7 @@ public class AlbumController {
         return ResponseEntity.ok("Upload de arquivos com sucesso.");
     }
 
-    @GetMapping("getImagens")
+    @GetMapping("imagens")
     public ResponseEntity getImagens() throws IOException, InvalidResponseException, InvalidKeyException, NoSuchAlgorithmException, ServerException, InternalException, XmlParserException, InsufficientDataException, ErrorResponseException {
         return uploader.getImage();
     }
