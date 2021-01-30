@@ -5,15 +5,14 @@
 
 # ORIENTAÇÕES
 
-	- Entrar na pasta raiz do projeto
-	- Fazer deploy da aplicação java
-    
 	# DOCKER	
-		- docker build ./ -t springbootapp	
+		Executar: 
 		
-		- docker-compose up
+			- docker build ./ -t springbootapp	
+		
+			- docker-compose up
 
-		- URL aplicação java: http://localhost:8091/api
+			- URL aplicação java: http://localhost:8091/api
 		
 	# NGINX
 		- Foi feito a configuração do Proxy reverso
