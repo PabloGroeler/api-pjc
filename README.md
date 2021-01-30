@@ -21,7 +21,7 @@
 
 # USUÁRIOS 
  
-# Cadastrar
+# Post
 
 	- http://localhost:8091api/usuarios
 
